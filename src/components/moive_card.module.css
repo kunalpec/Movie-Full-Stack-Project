@@ -1,0 +1,157 @@
+/* =========================
+   Global Reset
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   Movie Card Base Styles
+========================= */
+.movie-card {
+  width: 210px; /* desktop size */
+  
+  background-color: #1a1a1a; /* dark theme */
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border-radius: 0; /* sharp corners */
+  cursor: pointer;
+  margin: 0.3rem;
+  /* Border + Animations */
+  border: 2px solid #fff;
+  animation: popOut 0.9s ease-out, 
+             colorChange 10s infinite alternate ease-in-out;
+
+  /* Hover transition */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* =========================
+   Movie Card Image
+========================= */
+.movie-card img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+
+  /* Inner border */
+  padding: 10px;
+  border-bottom: 2px solid #fff;
+
+  /* Animations */
+  animation: popOut 0.9s ease-out,
+             colorChange 10s infinite alternate ease-in-out;
+}
+
+.watch {
+  color: #eaff00; /* neon yellow text */
+  font-weight: bold;
+  font-size: 1rem;
+  width: 100%;
+  padding: 0.6rem;
+  background: linear-gradient(90deg, #0a0a0a, #2b2b2b, #0a0a0a);
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  border-top: 2px solid #eaff00;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, color 0.3s ease;
+}
+
+.watch:hover {
+  background: linear-gradient(90deg, #1a1a1a, #3b3b3b, #1a1a1a);
+  transform: scale(1.05);
+  color: #ffffff; /* switches to white on hover */
+}
+
+
+/* =========================
+   Movie Title
+========================= */
+.movie-card .title{
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.5rem;
+  text-align: center;
+  color: #FFD700; /* gold */
+  
+}
+
+/* =========================
+   Hover Effect
+========================= */
+.movie-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* =========================
+   Keyframes: Pop-Out
+========================= */
+@keyframes popOut {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* =========================
+   Keyframes: Color Change
+========================= */
+@keyframes colorChange {
+  0%   { border-color: #ff4b2b; } /* red-orange */
+  14%  { border-color: #ffcc00; } /* yellow */
+  28%  { border-color: #4bff4b; } /* green */
+  42%  { border-color: #00ffff; } /* cyan */
+  57%  { border-color: #4b7bff; } /* blue */
+  71%  { border-color: #b84bff; } /* purple */
+  85%  { border-color: #ff4bf0; } /* pink */
+  100% { border-color: #ff4b2b; } /* back to red-orange */
+}
+
+/* =========================
+   Responsive: Tablets
+========================= */
+@media (max-width: 768px) {
+  .movie-card {
+    width: 180px;
+    margin: auto;
+  }
+  .movie-card img {
+    height: 250px;
+  }
+  .movie-card .title {
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================
+   Responsive: Mobile
+========================= */
+@media (max-width: 480px) {
+  .movie-card {
+    width: 140px;
+    margin: auto;
+  }
+  .movie-card img {
+    height: 200px;
+  }
+  .movie-card .title {
+    font-size: 0.8rem;
+  }
+}

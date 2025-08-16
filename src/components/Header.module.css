@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 🎬 Dark Movie Platform Header */
+.header-1 {
+  background: linear-gradient(90deg, #000000, #292727, #000000, #000000); /* dark black/gray */
+  background-size: 200% 200%;
+  animation: gradientFlow 20s linear infinite;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.brand {
+  color: #FFD700; /* gold accent */
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 0.9rem;
+  list-style: none;
+  text-shadow: 0 0 0.5rem rgba(255, 215, 0, 0.7); /* subtle glow */
+}
+
+.ui-1 {
+  display: flex;
+  gap: 3rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 0.8rem;
+  list-style: none;
+}
+
+.ui-1 li a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 1rem;
+  padding: 0.3rem 0.5rem;
+  border-bottom: 2px solid transparent;
+  background-color: transparent;
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.ui-1 li a:hover {
+  color: #FFD700; /* gold hover */
+  background-color: rgba(255, 215, 0, 0.1);
+  border-bottom: 2px solid #726e59;
+  transform: scale(1.05);
+}
+
+
+/* 📱 Responsive menu */
+@media (max-width: 768px) {
+  .header-1 {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .ui-1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 1rem;
+    justify-content: center;
+  }
+
+  .brand {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+}

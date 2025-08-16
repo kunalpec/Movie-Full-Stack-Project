@@ -1,0 +1,56 @@
+.type-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  width: 100%;
+  padding: 0 10px; /* add padding for mobile */
+  box-sizing: border-box;
+}
+
+.type-container input {
+  flex: 1; /* take remaining space */
+  max-width: 700px;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  font-size: 16px;
+  outline: none;
+  background-color: #1c1c1c;
+  color: #fff;
+  border-right: 1px solid #444;
+}
+
+.type-container input::placeholder {
+  color: #888;
+}
+
+.type-container button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  background-color: #e50914; /* Netflix red style */
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.type-container button:hover {
+  background-color: #f40612;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  .type-container {
+    flex-direction: column;
+  }
+
+  .type-container input,
+  .type-container button {
+    width: 100%;
+    max-width: none;
+    border-radius: 5px;
+    margin: 5px 0;
+  }
+}

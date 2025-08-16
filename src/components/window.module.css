@@ -1,0 +1,53 @@
+/* Existing styles remain unchanged */
+.window-overlay {
+  color: aliceblue;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
+}
+
+.window-content {
+  background: #222;
+  color: #fff;
+  border-radius: 10px;
+  width: 80vw;
+  height: 95vh;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.close-button {
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
+  background-color: #222;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.close-button:hover {
+  background-color: #494747;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  .window-content {
+    width: 95vw;   /* almost full width on small screens */
+    height: 90vh;  /* slightly smaller height for mobile */
+  }
+
+  .close-button {
+    width: 95vw;   /* match content width */
+    font-size: 0.9rem;
+    padding: 0.3rem;
+  }
+}
