@@ -15,23 +15,12 @@ const App = () => {
   const [fetchMore, setFetchMore] = useState(false);
   const [watch, setWatch] = useState(false);
   const [moivewatch, setmoivewatch] = useState("");
-  const [moiveurl, setmoiveurl] = useState("");
-  const [page,setpage]=useState(2);
+  const [moiveurl, setmoiveurl] = useState([]);
+  const [page, setpage] = useState(2);
+  const [movieId, setMovieId] = useState("");
+  const [videoindex, setvideoindex] = useState(0);
 
-  // const sending_genre = {
-  //   Action: "action",
-  //   Comedy: "comedy",
-  //   Drama: "drama",
-  //   Horror: "horror",
-  //   Romance: "romance",
-  //   Thriller: "thriller",
-  //   Sci: "science",
-  //   Fantasy: "fantasy",
-  //   Animation: "animation",
-  //   Adventure: "adventure",
-  //   Crime: "crime",
-  // };
-
+  // handle genre selection
   const handleClick = (genre) => {
     setSelectedGenre(genre);
     setSelectedMovie("");
@@ -39,73 +28,105 @@ const App = () => {
     console.log(`Show genre for: ${genre}`);
   };
 
+  // handle movie selection
   const handleMovieClick = (title) => {
     setSelectedMovie(title);
     setSelectedGenre("");
     setpage(2);
-    console.log(`Show moive for: ${title}`);
+    console.log(`Show movie for: ${title}`);
   };
 
   const onclickmore = () => {
     setFetchMore(true);
     setpage(page + 1);
-    console.log(selectedGenre || selectedMovie);
+    console.log("Fetching more for:", selectedGenre || selectedMovie);
   };
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleWatchClick = (title) => {
     setWatch(true);
     setmoivewatch(title);
     scrollToTop();
-    console.log(watch);
+    setvideoindex(0);
     console.log("Watch button clicked for:", title);
   };
 
+  // 🔹 Fetch YouTube URL if movie is selected
+  useEffect(() => {
+    if (!moivewatch || movieId === "") return;
+    // else fetch from TMDB
+    const fetchMovieVideos = async () => {
+      try {
+        const API_KEY = "6c29b17d7336b425da5490f97a806522";
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US&api_key=${API_KEY}`
+        );
+        const data = await res.json();
 
-  // Fetch YouTube URL for the selected movie
+        if (data.results && data.results.length > 0) {
+          const youtubeVideo = data.results.filter(
+            (video) => video.site === "YouTube"
+          ).map((video) => video.key);
+          
+          if (youtubeVideo.length > 0) {
+            const youtubeUrl = youtubeVideo.map((links)=>`https://www.youtube.com/embed/${links}`);
+            setmoiveurl(youtubeUrl);
+            console.log("YouTube URL cached:", youtubeUrl);
+          }
+        } else {
+          console.log("No videos found for:", moivewatch);
+        }
+      } catch (err) {
+        console.error("Error fetching YouTube videos:", err);
+      } finally {
+        setMovieId(""); // reset after fetch
+      }
+    };
+
+    fetchMovieVideos();
+  }, [moivewatch, movieId]);
+
+  // 🔹 Fetch movieId from Django API
   useEffect(() => {
     if (!moivewatch) return;
 
     const geturlMovies = async () => {
       try {
         const res = await axios.get("http://127.0.0.1:8000/youtube_url/", {
-          params: { name: moivewatch },
+          params: { name: moivewatch},
+
         });
-        setmoiveurl(res.data.url);
-        console.log(moiveurl);
+        setMovieId(res.data.id);
+        console.log("Fetched movieId:", res.data.id);
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching movieId:", err);
       }
     };
 
     geturlMovies();
   }, [moivewatch]);
 
-  // Fetch more movies when "More" is clicked
+  // 🔹 Fetch more movies when "More" is clicked
   useEffect(() => {
     if (!fetchMore || (!selectedGenre && !selectedMovie)) return;
 
     const getMoreMovies = async () => {
       try {
         const res = await axios.get("http://127.0.0.1:8000/more_movies/", {
-          params: { name:selectedGenre || selectedMovie,
-            page:page
-           },
+          params: { name: selectedGenre || selectedMovie, page: page },
         });
-        setResults((prevResults) =>
-          [...prevResults, ...res.data].filter(
+
+        setResults((prev) =>
+          [...prev, ...res.data].filter(
             (movie, i, self) =>
               i === self.findIndex((m) => m.title === movie.title)
           )
         );
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching more movies:", err);
       } finally {
         setFetchMore(false);
       }
@@ -114,7 +135,7 @@ const App = () => {
     getMoreMovies();
   }, [fetchMore, selectedGenre, selectedMovie]);
 
-  // Fetch movies by title
+  // 🔹 Fetch movies by title
   useEffect(() => {
     if (!selectedMovie.trim()) return;
 
@@ -125,56 +146,46 @@ const App = () => {
         });
         setResults(res.data);
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching movie:", err);
       }
     };
 
     fetchMovies();
   }, [selectedMovie]);
 
-  // Fetch movies by genre
+  // 🔹 Fetch movies by genre
   useEffect(() => {
     if (!selectedGenre) return;
 
     const fetchGenre = async () => {
       try {
-
         const res = await axios.get("http://127.0.0.1:8000/genres/", {
-          params: { name: selectedGenre},
+          params: { name: selectedGenre },
         });
         setResults(res.data);
-        // console.log(res.data);
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching genre:", err);
       }
     };
 
     fetchGenre();
   }, [selectedGenre]);
 
-  // Default data
+  // 🔹 Default data
   const data = [
     { title: "Iron Man", poster: "/78lPtwv72eTNqFW9COBYI0dWDJa.jpg" },
-    {
-      title: "Avengers: The Kang Dynasty",
-      poster: "/utZTb3VBrH0zR77BcISU67pHuAx.jpg",
-    },
+    { title: "Avengers: The Kang Dynasty", poster: "/utZTb3VBrH0zR77BcISU67pHuAx.jpg" },
     { title: "Fantastic Four", poster: "/jatnqRPnxjg2Q6cFsAjmrBNhx9.jpg" },
-    {
-      title: "Avengers: Secret Wars",
-      poster: "/8chwENebfUEJzZ7sMUA0nOgiCKk.jpg",
-    },
-    {
-      title: "Inhumans: The First Chapter",
-      poster: "/cIvgEUM9DjTcgttmDkfi0sk6oxQ.jpg",
-    },
+    { title: "Avengers: Secret Wars", poster: "/8chwENebfUEJzZ7sMUA0nOgiCKk.jpg" },
+    { title: "Inhumans: The First Chapter", poster: "/cIvgEUM9DjTcgttmDkfi0sk6oxQ.jpg" },
   ];
 
   return (
     <>
       <Header />
       <Type handleMovieClick={handleMovieClick} />
-      {watch && <Window setWatch={setWatch} url_key={moiveurl} />}
+      {watch && <Window setWatch={setWatch} url_key={moiveurl}  setmoiveurl={setmoiveurl} videoindex={videoindex} setvideoindex={setvideoindex} />}
+
       <div className="main">
         <div className="container">
           {results.length > 0
@@ -202,6 +213,7 @@ const App = () => {
           <Gener selectedGenre={selectedGenre} handleClick={handleClick} />
         </div>
       </div>
+
       <More onclickmore={onclickmore} />
     </>
   );
