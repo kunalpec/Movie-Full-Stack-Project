@@ -1,0 +1,124 @@
+/* =========================
+   Movie Card (Netflix Style)
+========================= */
+.movie-card {
+  position: relative;
+  width: 220px;
+  height: 330px;
+  margin: 0.9rem;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #141414;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+}
+
+.movie-card:hover img {
+  transform: scale(1.1);
+}
+
+/* =========================
+   Overlay (Netflix Hover Style)
+========================= */
+.movie-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.movie-card:hover::after {
+  opacity: 1;
+}
+
+/* =========================
+   Watch Trailer Button
+========================= */
+.watch {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e50914; /* Netflix Red */
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.3s ease, background 0.3s ease;
+  z-index: 2;
+}
+
+.movie-card:hover .watch {
+  opacity: 1;
+  transform: translateX(-50%) scale(1.05);
+}
+
+.watch:hover {
+  background: #f40612;
+}
+
+/* =========================
+   Title (Modern Netflix Style)
+========================= */
+.title {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.movie-card:hover .title {
+  opacity: 1;
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 768px) {
+  .movie-card {
+    width: 180px;
+    height: 270px;
+  }
+  .title {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-card {
+    width: 140px;
+    height: 210px;
+  }
+  .title {
+    font-size: 0.8rem;
+  }
+}
