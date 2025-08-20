@@ -4,43 +4,50 @@
   align-items: center;
   margin: 10px 0;
   width: 100%;
-  padding: 0 10px; /* add padding for mobile */
+  padding: 0 10px;
   box-sizing: border-box;
 }
 
 .type-container input {
-  flex: 1; /* take remaining space */
+  flex: 1;
   max-width: 700px;
   padding: 12px 15px;
-  border: none;
-  border-radius: 5px 0 0 5px;
+  border: 2px solid #333;
+  border-radius: 8px 0 0 8px;
   font-size: 16px;
   outline: none;
-  background-color: #1c1c1c;
+  background-color: #1a1a1a; /* same as movie card background */
   color: #fff;
-  border-right: 1px solid #444;
+  transition: border-color 0.3s ease;
 }
 
 .type-container input::placeholder {
-  color: #888;
+  color: #a5a59b; /* same muted tone as movie titles */
+}
+
+.type-container input:focus {
+  border-color: #ff4c4c; /* red accent focus */
 }
 
 .type-container button {
   padding: 12px 25px;
   border: none;
-  border-radius: 0 5px 5px 0;
-  background-color: #e50914; /* Netflix red style */
+  border-radius: 0 8px 8px 0;
+  background-color: #ff4c4c; /* same accent red */
+  height: 46px;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .type-container button:hover {
-  background-color: #f40612;
+  background-color: #e53939; /* slightly darker red */
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
-/* Media Query for smaller screens */
+/* Mobile responsive */
 @media (max-width: 768px) {
   .type-container {
     flex-direction: column;
@@ -50,7 +57,7 @@
   .type-container button {
     width: 100%;
     max-width: none;
-    border-radius: 5px;
+    border-radius: 8px;
     margin: 5px 0;
   }
 }

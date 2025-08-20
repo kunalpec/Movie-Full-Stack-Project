@@ -4,78 +4,75 @@
   box-sizing: border-box;
 }
 
-/* 🎬 Dark Movie Platform Header */
+/* 🔥 Gen-Y Dark Header */
 .header-1 {
-  background: linear-gradient(90deg, #000000, #292727, #000000, #000000); /* dark black/gray */
-  background-size: 200% 200%;
-  animation: gradientFlow 20s linear infinite;
+  background: #111; /* solid dark background */
   height: 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
 }
 
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
+/* Brand / Logo */
 .brand {
-  color: #FFD700; /* gold accent */
+  color: #ff4c4c; /* red accent */
   font-family: 'Poppins', sans-serif;
   font-weight: bold;
-  font-size: 0.9rem;
-  list-style: none;
-  text-shadow: 0 0 0.5rem rgba(255, 215, 0, 0.7); /* subtle glow */
+  font-size: 1rem;
+  letter-spacing: 1px;
+  user-select: none;
+  transition: transform 0.3s ease;
 }
 
+.brand:hover {
+  transform: scale(1.05);
+}
+
+/* Navigation links */
 .ui-1 {
   display: flex;
-  gap: 3rem;
+  gap: 2rem;
   font-family: 'Poppins', sans-serif;
-  font-weight: bold;
-  font-size: 0.8rem;
+  font-weight: 500;
+  font-size: 0.9rem;
   list-style: none;
 }
 
 .ui-1 li a {
-  color: #ffffff;
+  color: #a5a59b; /* muted text */
   text-decoration: none;
-  margin-left: 1rem;
-  padding: 0.3rem 0.5rem;
-  border-bottom: 2px solid transparent;
-  background-color: transparent;
-  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
 }
 
-.ui-1 li a:hover {
-  color: #FFD700; /* gold hover */
-  background-color: rgba(255, 215, 0, 0.1);
-  border-bottom: 2px solid #726e59;
+.ui-1 li a:hover,
+.ui-1 li a.active {
+  color: #fff;
+  background-color: #ff4c4c; /* red hover */
   transform: scale(1.05);
 }
-
 
 /* 📱 Responsive menu */
 @media (max-width: 768px) {
   .header-1 {
     flex-direction: column;
-    height: auto;
+    align-items: center;
     padding: 1rem;
+    height: auto;
   }
 
   .ui-1 {
-    display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    font-size: 1rem;
     justify-content: center;
+    margin-top: 0.5rem;
   }
 
   .brand {
     font-size: 1.1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
   }
 }

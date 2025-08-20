@@ -33,6 +33,7 @@ const App = () => {
     setSelectedMovie(title);
     setSelectedGenre("");
     setpage(2);
+    scrollToTop(600);
     console.log(`Show movie for: ${title}`);
   };
 
@@ -42,14 +43,14 @@ const App = () => {
     console.log("Fetching more for:", selectedGenre || selectedMovie);
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollToTop = (top_index) => {
+    window.scrollTo({ top: top_index, behavior: "smooth" });
   };
 
   const handleWatchClick = (title) => {
     setWatch(true);
     setmoivewatch(title);
-    scrollToTop();
+    scrollToTop(140);
     setvideoindex(0);
     console.log("Watch button clicked for:", title);
   };
@@ -189,18 +190,18 @@ const App = () => {
       <div className="main">
         <div className="container">
           {results.length > 0
-            ? results.map((movie) => (
+            ? results.map((movie,index) => (
                 <Card
-                  key={movie.title}
+                  key={index}
                   poster_path={movie.poster}
                   title={movie.title}
                   handleMovieClick={handleMovieClick}
                   handleWatchClick={() => handleWatchClick(movie.title)}
                 />
               ))
-            : data.map((temp) => (
+            : data.map((temp,index) => (
                 <Card
-                  key={temp.title}
+                  key={index}
                   poster_path={temp.poster}
                   title={temp.title}
                   handleMovieClick={handleMovieClick}
@@ -210,7 +211,7 @@ const App = () => {
         </div>
 
         <div className="genreContainer">
-          <Gener selectedGenre={selectedGenre} handleClick={handleClick} />
+          <Gener selectedGenre={selectedGenre} handleClick={handleClick}/>
         </div>
       </div>
 

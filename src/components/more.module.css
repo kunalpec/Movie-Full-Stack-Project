@@ -16,20 +16,21 @@
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.15s ease;
+  transition: background-color 0.25s ease, transform 0.2s ease, color 0.25s ease;
 }
 
 .more-btn:hover {
-  background-color: #333;
-  transform: translateY(-2px);
+  background-color: #FFD700; /* gold accent */
+  color: #111; /* dark text for contrast */
+  transform: scale(1.05);
 }
 
 .more-btn:active {
-  background-color: #444;
-  transform: translateY(0);
+  background-color: #e6c200; /* slightly darker gold */
+  transform: scale(1);
 }
 
-/* Medium screens: slightly larger button */
+/* Medium screens */
 @media (max-width: 768px) {
   .more-btn {
     font-size: 14px;
@@ -37,7 +38,12 @@
   }
 }
 
-/* Small screens: full-width button */
+.icon {
+  margin-right: 0.1rem;
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+/* Small screens */
 @media (max-width: 480px) {
   .more-wrapper {
     padding: 8px;

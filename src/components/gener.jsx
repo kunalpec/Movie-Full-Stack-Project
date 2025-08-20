@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./gener.module.css";
-
-const Gener = ({selectedGenre,handleClick }) => {
+import { RiAddLargeLine } from "react-icons/ri";
+const Gener = ({selectedGenre,handleClick}) => {
   const genres = [
     "Action",
     "Comedy",
@@ -27,7 +27,7 @@ const Gener = ({selectedGenre,handleClick }) => {
             }`}
             onClick={() => handleClick(genre)}
           >
-            {genre}
+            <span className={styles.icon}><RiAddLargeLine /></span>{genre}
           </li>
         ))}
       </ul>

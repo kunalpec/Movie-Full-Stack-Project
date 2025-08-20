@@ -11,12 +11,19 @@
 .window-content {
   background: #222;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 16px;
   width: 80vw;
   height: 95vh;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  padding: 16px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.7);
+  padding: 20px;
   overflow-y: hidden;
+  border: 1px solid #333;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.window-content:hover {
+  transform: scale(1.01);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
 }
 
 .close-button {
@@ -24,19 +31,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 8px 0;
-  background-color: rgba(255, 255, 255, 0.1);
+  margin: 10px 0;
+  background-color: rgba(255, 215, 0, 0.1); /* gold tint */
   border: none;
-  color: #fff;
+  color: #FFD700;
   font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  padding: 0.5rem 0;
-  border-radius: 5px;
-  transition: background 0.3s ease;
+  padding: 0.6rem 0;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.2s ease, color 0.3s ease;
+  user-select: none;
 }
 
 .close-button:hover {
-  background-color: #494747;
+  background-color: #FFD700;
+  color: #111;
+  transform: scale(1.05);
 }
 
 .url-list {
@@ -45,29 +56,34 @@
   flex-wrap: wrap;
   padding: 12px;
   margin-top: 12px;
+  user-select: none;
 }
 
 .url-item {
   background-color: #333;
   color: #fff;
-  border-radius: 5px;
-  padding: 8px 12px;
+  border-radius: 6px;
+  padding: 8px 14px;
   cursor: pointer;
   text-align: center;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s ease, transform 0.25s ease, color 0.3s ease;
   text-decoration: none;
   display: inline-block;
+  font-weight: 500;
 }
 
 .url-item:hover {
-  background-color: #555;
-  transform: translateY(-2px);
+  background-color: #FFD700;
+  color: #111;
+  transform: translateY(-2px) scale(1.05);
 }
 
-.active{
-  background: rgb(187, 57, 57);
-  transform: scale(1.2);
+.active {
+  background: #FFD700;
+  color: #111;
+  transform: scale(1.15);
 }
+
 /* Media query for smaller screens */
 @media (max-width: 600px) {
   .window-content {
@@ -78,7 +94,7 @@
   .close-button {
     width: 95vw;
     font-size: 0.9rem;
-    padding: 0.4rem 0;
+    padding: 0.5rem 0;
   }
 
   .url-list {
@@ -87,7 +103,7 @@
   }
 
   .url-item {
-    padding: 6px 10px;
+    padding: 6px 12px;
     font-size: 0.9rem;
   }
 }

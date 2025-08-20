@@ -12,7 +12,7 @@ const Window = ({ setWatch, url_key, setmoiveurl ,videoindex,setvideoindex}) => 
           height="100%"
           src={list[videoindex]}
           title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
           allowFullScreen
         ></iframe>
       </div>
