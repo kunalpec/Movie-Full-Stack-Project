@@ -75,16 +75,3 @@ body {
     padding: 0.5rem;
   }
 }
-
-/* Floating More Button */
-.more {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background: linear-gradient(135deg, #ff007f, #ff00ff);
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 50px;
-  font-weight: bold;
-  cursor: pointer;
-}
