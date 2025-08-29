@@ -1,62 +1,69 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 
-/* 🔥 Gen-Y Dark Header */
+/* Header container */
 .header-1 {
-  background: #111; /* solid dark background */
-  height: 3rem;
+  background: #0e0e0e;
+  height: 4.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+  box-shadow: 0 2px 8px rgba(65, 65, 65, 0.6);
 }
 
-/* Brand / Logo */
+/* Brand logo */
 .brand {
-  color: #ff4c4c; /* red accent */
+  color: #ffffff;
   font-family: 'Poppins', sans-serif;
-  font-weight: bold;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  user-select: none;
+  font-weight: 700;
+  font-size: 2.2rem;
+  letter-spacing: 0.2px;
+  cursor: pointer;
   transition: transform 0.3s ease;
 }
 
 .brand:hover {
+  text-shadow: #3bff5e 0 0 5px;
   transform: scale(1.05);
 }
 
-/* Navigation links */
+/* Navigation list */
 .ui-1 {
   display: flex;
-  gap: 2rem;
+  gap: 3.5rem;
   font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 1rem;
   list-style: none;
 }
 
 .ui-1 li a {
-  color: #a5a59b; /* muted text */
+  color: #ffffff;
   text-decoration: none;
-  padding: 0.4rem 0.6rem;
-  border-radius: 6px;
-  transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  padding: 5px;
 }
 
+/* Hover + Active link */
 .ui-1 li a:hover,
 .ui-1 li a.active {
-  color: #fff;
-  background-color: #ff4c4c; /* red hover */
-  transform: scale(1.05);
+  color: #3bff5e;
+  text-shadow: #3bff5e 0 0 5px;
 }
 
-/* 📱 Responsive menu */
-@media (max-width: 768px) {
+/* Highlight part of logo */
+.coloring {
+  color: #3bff5e;
+}
+
+/* Responsive */
+@media (max-width: 880px) {
   .header-1 {
     flex-direction: column;
     align-items: center;
@@ -66,13 +73,14 @@
 
   .ui-1 {
     flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 0.5rem;
+    gap: 1.5rem;
+    justify-content: space-evenly;
+    margin-top: 0.8rem;
+    width: 100%;
   }
 
   .brand {
-    font-size: 1.1rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
   }
 }

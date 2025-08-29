@@ -1,54 +1,72 @@
+/* 🎨 Global Variables */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  --card-width: 230px;
+  --card-bg: #0a0a0a;
+  --card-bg-hover: #1a1a1a;
+
+  --text-light: #ffffff;
+  --text-muted: #a5a59b;
+  --font-family: 'Poppins', sans-serif;
+
+  --transition: 0.3s ease;
+  --shadow-hover: 0 6px 15px rgba(0, 0, 0, 0.7);
+
+  --watch-bg: linear-gradient(90deg, #0a0a0a, #2b2b2b, #0a0a0a);
+  --watch-bg-hover: linear-gradient(90deg, #1a1a1a, #3b3b3b, #1a1a1a);
 }
 
+/* 🔹 Movie Card */
 .movie-card {
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: var(--card-width);
   height: auto;
   user-select: none;
-  background-color: #1a1a1a;
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-  border-radius: 20px;
   cursor: pointer;
-  margin: 0.2rem;
-  animation: popOut 0.9s ease-out;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: popOut 0.9s ease-out forwards;
+  transition: transform var(--transition), box-shadow var(--transition);
+  margin-bottom: 0.94rem;
+  border-bottom: 1px solid var(--text-light);
 }
 
 .movie-card img {
-  width: 100%;
-  height: 280px;
+  width: auto;
+  height: auto;
   object-fit: cover;
-  border-radius: 20px 20px 0 0; /* match parent card */
-  animation: popOut 0.9s ease-out;
-  transition: transform 0.9s ease;
+  transition: transform var(--transition), filter var(--transition);
 }
 
 .movie-card:hover img {
-  transform: scale(0.9);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-
+  filter: brightness(0.8);
+  transform: scale(0.99);
 }
 
+.movie-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* 🔹 Watch Button */
 .watch {
-  color: #ffffff;
+  color: var(--text-light);
   font-weight: bold;
   font-size: 1rem;
   width: 100%;
   padding: 0.4rem;
-  background: linear-gradient(90deg, #0a0a0a, #2b2b2b, #0a0a0a);
+  background: var(--watch-bg);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background var(--transition), color var(--transition);
+}
+
+.watch:hover {
+  background: var(--watch-bg-hover);
+  color: var(--text-light);
 }
 
 .icon {
@@ -56,25 +74,23 @@
   font-size: 1rem;
 }
 
-.watch:hover {
-  background: linear-gradient(90deg, #1a1a1a, #3b3b3b, #1a1a1a);
-  color: #ffffff;
-}
-
+/* 🔹 Title */
 .movie-card .title {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-family);
   font-weight: bold;
   font-size: 1rem;
   padding: 0.5rem;
   text-align: center;
-  color: #a5a59b;
+  color: var(--text-muted);
+  transition: color var(--transition);
 }
 
-.movie-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+.movie-card .title:hover {
+  color: var(--text-light);
+  text-shadow: #ffffff8c 0 0 3px;
 }
 
+/* 🔹 Animation */
 @keyframes popOut {
   0% {
     transform: scale(0.1);
@@ -89,9 +105,10 @@
   }
 }
 
-@media (max-width: 768px) {
+/* 🔹 Responsive */
+@media (max-width: 880px) {
   .movie-card {
-    width: 180px;
+    --card-width: 180px;
     margin: auto;
   }
   .movie-card img {
@@ -104,7 +121,7 @@
 
 @media (max-width: 480px) {
   .movie-card {
-    width: 140px;
+    --card-width: 140px;
     margin: auto;
   }
   .movie-card img {

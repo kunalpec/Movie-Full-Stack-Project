@@ -19,6 +19,7 @@ const App = () => {
   const [page, setpage] = useState(2);
   const [movieId, setMovieId] = useState("");
   const [videoindex, setvideoindex] = useState(0);
+  const [click_genre, setclick_genre] = useState(false);
 
   // handle genre selection
   const handleClick = (genre) => {
@@ -55,6 +56,11 @@ const App = () => {
     console.log("Watch button clicked for:", title);
   };
 
+  const handlegenreClick = () => {
+    setclick_genre(!click_genre);
+    console.log("Genre button clicked:", click_genre);
+  };
+
   // 🔹 Fetch YouTube URL if movie is selected
   useEffect(() => {
     if (!moivewatch || movieId === "") return;
@@ -68,12 +74,14 @@ const App = () => {
         const data = await res.json();
 
         if (data.results && data.results.length > 0) {
-          const youtubeVideo = data.results.filter(
-            (video) => video.site === "YouTube"
-          ).map((video) => video.key);
-          
+          const youtubeVideo = data.results
+            .filter((video) => video.site === "YouTube")
+            .map((video) => video.key);
+
           if (youtubeVideo.length > 0) {
-            const youtubeUrl = youtubeVideo.map((links)=>`https://www.youtube.com/embed/${links}`);
+            const youtubeUrl = youtubeVideo.map(
+              (links) => `https://www.youtube.com/embed/${links}`
+            );
             setmoiveurl(youtubeUrl);
             console.log("YouTube URL cached:", youtubeUrl);
           }
@@ -97,8 +105,7 @@ const App = () => {
     const geturlMovies = async () => {
       try {
         const res = await axios.get("http://127.0.0.1:8000/youtube_url/", {
-          params: { name: moivewatch},
-
+          params: { name: moivewatch },
         });
         setMovieId(res.data.id);
         console.log("Fetched movieId:", res.data.id);
@@ -175,44 +182,63 @@ const App = () => {
   // 🔹 Default data
   const data = [
     { title: "Iron Man", poster: "/78lPtwv72eTNqFW9COBYI0dWDJa.jpg" },
-    { title: "Avengers: The Kang Dynasty", poster: "/utZTb3VBrH0zR77BcISU67pHuAx.jpg" },
+    {
+      title: "Avengers: The Kang Dynasty",
+      poster: "/utZTb3VBrH0zR77BcISU67pHuAx.jpg",
+    },
     { title: "Fantastic Four", poster: "/jatnqRPnxjg2Q6cFsAjmrBNhx9.jpg" },
-    { title: "Avengers: Secret Wars", poster: "/8chwENebfUEJzZ7sMUA0nOgiCKk.jpg" },
-    { title: "Inhumans: The First Chapter", poster: "/cIvgEUM9DjTcgttmDkfi0sk6oxQ.jpg" },
+    {
+      title: "Avengers: Secret Wars",
+      poster: "/8chwENebfUEJzZ7sMUA0nOgiCKk.jpg",
+    },
+    {
+      title: "Inhumans: The First Chapter",
+      poster: "/cIvgEUM9DjTcgttmDkfi0sk6oxQ.jpg",
+    },
   ];
 
   return (
     <>
-      <Header />
-      <Type handleMovieClick={handleMovieClick} />
-      {watch && <Window setWatch={setWatch} url_key={moiveurl}  setmoiveurl={setmoiveurl} videoindex={videoindex} setvideoindex={setvideoindex} />}
-
-      <div className="main">
-        <div className="container">
-          {results.length > 0
-            ? results.map((movie,index) => (
-                <Card
-                  key={index}
-                  poster_path={movie.poster}
-                  title={movie.title}
-                  handleMovieClick={handleMovieClick}
-                  handleWatchClick={() => handleWatchClick(movie.title)}
-                />
-              ))
-            : data.map((temp,index) => (
-                <Card
-                  key={index}
-                  poster_path={temp.poster}
-                  title={temp.title}
-                  handleMovieClick={handleMovieClick}
-                  handleWatchClick={() => handleWatchClick(temp.title)}
-                />
-              ))}
-        </div>
-
+      <Header
+        tpp={<Type handleMovieClick={handleMovieClick} />}
+        handlegenreClick={handlegenreClick}
+        click_genre={click_genre}
+      />
+      {click_genre && (
         <div className="genreContainer">
-          <Gener selectedGenre={selectedGenre} handleClick={handleClick}/>
+          <Gener selectedGenre={selectedGenre} handleClick={handleClick} />
         </div>
+      )}
+      {watch && (
+        <Window
+          setWatch={setWatch}
+          url_key={moiveurl}
+          setmoiveurl={setmoiveurl}
+          videoindex={videoindex}
+          setvideoindex={setvideoindex}
+        />
+      )}
+
+      <div className="container">
+        {results.length > 0
+          ? results.map((movie, index) => (
+              <Card
+                key={index}
+                poster_path={movie.poster}
+                title={movie.title}
+                handleMovieClick={handleMovieClick}
+                handleWatchClick={() => handleWatchClick(movie.title)}
+              />
+            ))
+          : data.map((temp, index) => (
+              <Card
+                key={index}
+                poster_path={temp.poster}
+                title={temp.title}
+                handleMovieClick={handleMovieClick}
+                handleWatchClick={() => handleWatchClick(temp.title)}
+              />
+            ))}
       </div>
 
       <More onclickmore={onclickmore} />

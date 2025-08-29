@@ -1,55 +1,81 @@
+/* 🎨 Global Variables for Reusability */
+* {
+  --bg-dark: #111;
+  --btn-dark: #222;
+  --btn-border: #333;
+
+  --text-light: #f5f5f5;
+  --text-dark: #111;
+
+  --accent-gold: #3bff5e;
+  --accent-gold-dark: #44c05a;
+
+  --btn-radius: 8px;
+  --btn-font-size: 15px;
+  --btn-padding: 10px 18px;
+
+  --transition-fast: 0.25s ease;
+  --transition-medium: 0.3s ease;
+}
+
+/* 🔹 Wrapper */
 .more-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 12px;
-  background-color: #111; /* dark background */
+  background-color: var(--bg-dark);
 }
 
+/* 🔹 Button */
 .more-btn {
-  background-color: #222;   /* dark gray button */
+  background-color: var(--btn-dark);
   width: 100%;
-  color: #f5f5f5;           /* light text */
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 10px 18px;
-  font-size: 15px;
+  color: var(--text-light);
+  border: 1px solid var(--btn-border);
+  border-radius: var(--btn-radius);
+  padding: var(--btn-padding);
+  font-size: var(--btn-font-size);
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.25s ease, transform 0.2s ease, color 0.25s ease;
+  transition:
+    background-color var(--transition-medium),
+    transform var(--transition-medium),
+    color var(--transition-fast);
 }
 
 .more-btn:hover {
-  background-color: #FFD700; /* gold accent */
-  color: #111; /* dark text for contrast */
-  transform: scale(1.05);
+  background-color: var(--accent-gold);
+  color: var(--text-dark);
+  transform: scale(1.01);
 }
 
 .more-btn:active {
-  background-color: #e6c200; /* slightly darker gold */
+  background-color: var(--accent-gold-dark);
   transform: scale(1);
 }
 
+/* 🔹 Icon */
+.icon {
+  margin-right: 0.3rem;
+  font-size: 0.9rem;
+  margin-top: 1px;
+}
+
 /* Medium screens */
-@media (max-width: 768px) {
+@media (max-width: 880px) {
   .more-btn {
     font-size: 14px;
     padding: 8px 16px;
   }
 }
 
-.icon {
-  margin-right: 0.1rem;
-  font-size: 0.8rem;
-  margin-top: 2px;
-}
 /* Small screens */
 @media (max-width: 480px) {
   .more-wrapper {
     padding: 8px;
   }
   .more-btn {
-    width: 100%;
     font-size: 14px;
     padding: 10px;
   }

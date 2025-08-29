@@ -1,5 +1,19 @@
+:root {
+  --bg-dark: #111;
+  --bg-mid: #222;
+  --bg-card: #333;
+  --text-light: #fff;
+  --text-muted: aliceblue;
+  --text-dark: #111;
+  --accent-gold: #28cc0b;
+  --accent-gold-tint: rgb(76, 83, 74);
+  --shadow-strong: rgba(0, 0, 0, 0.7);
+  --shadow-stronger: rgba(0, 0, 0, 0.8);
+}
+
+/* Overlay */
 .window-overlay {
-  color: aliceblue;
+  color: var(--text-muted);
   height: auto;
   display: flex;
   flex-direction: column;
@@ -8,33 +22,35 @@
   margin: 2px;
 }
 
+/* Content */
 .window-content {
-  background: #222;
-  color: #fff;
+  background: var(--bg-mid);
+  color: var(--text-light);
   border-radius: 16px;
   width: 80vw;
   height: 95vh;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 6px 25px var(--shadow-strong);
   padding: 20px;
   overflow-y: hidden;
-  border: 1px solid #333;
+  border: 1px solid var(--bg-card);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .window-content:hover {
   transform: scale(1.01);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 8px 30px var(--shadow-stronger);
 }
 
+/* Close button */
 .close-button {
   width: 80vw;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px 0;
-  background-color: rgba(255, 215, 0, 0.1); /* gold tint */
+  background-color: var(--accent-gold-tint);
   border: none;
-  color: #FFD700;
+  color: var(--accent-gold);
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -45,11 +61,12 @@
 }
 
 .close-button:hover {
-  background-color: #FFD700;
-  color: #111;
-  transform: scale(1.05);
+  background-color: var(--accent-gold);
+  color: var(--text-dark);
+  transform: scale(1.01);
 }
 
+/* URL list */
 .url-list {
   display: flex;
   gap: 12px;
@@ -60,8 +77,8 @@
 }
 
 .url-item {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--bg-card);
+  color: var(--text-light);
   border-radius: 6px;
   padding: 8px 14px;
   cursor: pointer;
@@ -73,14 +90,14 @@
 }
 
 .url-item:hover {
-  background-color: #FFD700;
-  color: #111;
+  background-color: var(--accent-gold);
+  color: var(--text-dark);
   transform: translateY(-2px) scale(1.05);
 }
 
 .active {
-  background: #FFD700;
-  color: #111;
+  background: var(--accent-gold);
+  color: var(--text-dark);
   transform: scale(1.15);
 }
 
